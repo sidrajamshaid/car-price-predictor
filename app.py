@@ -2,42 +2,52 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load trained model
+# ✅ Set up page configuration (must be FIRST Streamlit command)
+st.set_page_config(page_title="Car Price Predictor", page_icon="🚗", layout="centered")
+
+# ✅ Optional: Apply custom CSS if file exists
+try:
+    with open("style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+except FileNotFoundError:
+    pass
+
+# ✅ Load trained model pipeline
 model = joblib.load("car_price_model.pkl")
 
-# Page title
+# ✅ App title and description
 st.title("🚗 Car Price Predictor")
+st.markdown("Fill in the car details to get an estimated market price 💰.")
 
-st.markdown("Enter details about the car below to estimate its price.")
+# ✅ Sidebar input form
+st.sidebar.header("🔧 Car Specifications")
 
-# User input fields
-year = st.number_input("Year", min_value=1990, max_value=2025, value=2015)
-odometer = st.number_input("Odometer (miles)", min_value=0, max_value=300000, value=60000)
+year = st.sidebar.number_input("Year", min_value=1990, max_value=2025, value=2015)
+odometer = st.sidebar.number_input("Odometer (miles)", min_value=0, max_value=300000, value=60000)
 
-manufacturer = st.selectbox("Manufacturer", ['ford', 'chevrolet', 'toyota', 'honda', 'nissan', 'jeep', 'other'])
-fuel = st.selectbox("Fuel Type", ['gas', 'diesel', 'electric', 'hybrid', 'other'])
-transmission = st.selectbox("Transmission", ['automatic', 'manual', 'other'])
-drive = st.selectbox("Drive Type", ['fwd', 'rwd', '4wd'])
-car_type = st.selectbox("Car Type", ['sedan', 'SUV', 'truck', 'hatchback', 'wagon', 'convertible', 'coupe', 'van', 'other'])
-paint_color = st.selectbox("Paint Color", ['black', 'white', 'silver', 'blue', 'red', 'grey', 'green', 'custom', 'other'])
-condition = st.selectbox("Condition", ['excellent', 'good', 'fair', 'like new', 'new', 'salvage'])
-cylinders = st.selectbox("Cylinders", ['4 cylinders', '6 cylinders', '8 cylinders', '3 cylinders', '5 cylinders', '10 cylinders', '12 cylinders', 'other'])
+manufacturer = st.sidebar.selectbox("Manufacturer", ['ford', 'chevrolet', 'toyota', 'honda', 'nissan', 'jeep', 'other'])
+fuel = st.sidebar.selectbox("Fuel Type", ['gas', 'diesel', 'electric', 'hybrid', 'other'])
+transmission = st.sidebar.selectbox("Transmission", ['automatic', 'manual', 'other'])
+drive = st.sidebar.selectbox("Drive Type", ['fwd', 'rwd', '4wd'])
+car_type = st.sidebar.selectbox("Car Type", ['sedan', 'SUV', 'truck', 'hatchback', 'wagon', 'convertible', 'coupe', 'van', 'other'])
+paint_color = st.sidebar.selectbox("Paint Color", ['black', 'white', 'silver', 'blue', 'red', 'grey', 'green', 'custom'])
+condition = st.sidebar.selectbox("Condition", ['excellent', 'good', 'fair', 'like new', 'new', 'salvage'])
+cylinders = st.sidebar.selectbox("Cylinders", ['4 cylinders', '6 cylinders', '8 cylinders', '3 cylinders', '5 cylinders'])
 
-# Create a DataFrame from user input
-input_data = pd.DataFrame({
-    'year': [year],
-    'odometer': [odometer],
-    'manufacturer': [manufacturer],
-    'fuel': [fuel],
-    'transmission': [transmission],
-    'drive': [drive],
-    'type': [car_type],
-    'paint_color': [paint_color],
-    'condition': [condition],
-    'cylinders': [cylinders]
-})
+# ✅ Predict button
+if st.button("🔍 Predict Car Price"):
+    input_data = pd.DataFrame({
+        'year': [year],
+        'odometer': [odometer],
+        'manufacturer': [manufacturer],
+        'fuel': [fuel],
+        'transmission': [transmission],
+        'drive': [drive],
+        'type': [car_type],
+        'paint_color': [paint_color],
+        'condition': [condition],
+        'cylinders': [cylinders]
+    })
 
-# Make prediction
-if st.button("Predict Price"):
-    predicted_price = model.predict(input_data)[0]
-    st.success(f"💰 Estimated Price: ${predicted_price:,.2f}")
+    prediction = model.predict(input_data)[0]
+    st.success(f"💸 Estimated Price: **${prediction:,.2f}**")
