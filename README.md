@@ -1,53 +1,92 @@
-# 🚗 Car Price Prediction Project
+# 🚗 Car Price Predictor Using Linear Regression
 
-A machine learning project that predicts used car prices based on data from Craigslist.
+A sleek, interactive **machine learning web app** that estimates used car prices based on details like year, mileage, brand, and condition — all in real time 🧠💸
 
-### 🔍 Dataset
+Built with:
 
-Source: [Kaggle - Craigslist Car Data](https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data)
-
-We use features like:
-
-- year, odometer
-- manufacturer, fuel, transmission, drive, car type
-- paint color, condition, cylinders
+- 🧪 **Scikit-learn** for model building
+- 🎨 **Streamlit** for a user-friendly interface
+- 🚀 **Hugging Face Spaces** for public deployment
 
 ---
 
-### 💡 Model
+## 💡 How the Model Was Built (My AI Work)
 
-- Model: Linear Regression (can also switch to Random Forest)
-- Preprocessing: OneHotEncoding + StandardScaler
-- Pipeline: Scikit-learn
-- R² Score: ~0.78
-- RMSE: ~5686
+Here’s a breakdown of what I did in the project 👇
+
+### 📦 1. Data Preparation
+
+- Cleaned and filtered the **Craigslist car dataset**
+- Removed noisy data and handled null/missing values
+- Selected meaningful features:
+  - `year`, `odometer`, `manufacturer`, `fuel`, `transmission`, `condition`, `cylinders`, etc.
+
+### 🧠 2. Model Pipeline
+
+- Encoded categorical variables using `OneHotEncoder`
+- Scaled numerical features using `StandardScaler`
+- Combined preprocessing and **Linear Regression** into a single pipeline using `Pipeline`
+
+### 📈 3. Training & Evaluation
+
+- Trained on real-world used car data
+- Model Performance:
+  - 📊 **R² Score** ≈ 0.78
+  - 📉 **RMSE** ≈ 5686
+- Exported trained pipeline as `car_price_model.pkl` using `joblib`
+
+### 🖥️ 4. App Integration & Deployment
+
+- Developed a fully functional Streamlit app for live predictions
+- Styled the UI with custom CSS
+- Connected the model to Hugging Face Spaces for easy access
+  👉 [🚀 Live App](https://huggingface.co/spaces/Sidrajamshaid/car-price-predictor)
 
 ---
 
-### 📊 Files
+## 🧰 Technologies Used
 
-| File                           | Description                          |
-| ------------------------------ | ------------------------------------ |
-| `car_price_prediction.ipynb` | Main notebook for training the model |
-| `car_price_model.pkl`        | Saved ML model                       |
-| `app.py`                     | Streamlit app for live predictions   |
-| `requirements.txt`           | Python dependencies                  |
+| Tool            | Purpose                        |
+| --------------- | ------------------------------ |
+| 🐍 Python       | Core programming language      |
+| 📊 Pandas       | Data cleaning & manipulation   |
+| 🧪 Scikit-learn | Preprocessing + model pipeline |
+| 📦 Joblib       | Saving/loading trained model   |
+| 🎨 Streamlit    | Web app interface              |
+| 🚀 Hugging Face | Public deployment (Spaces)     |
 
 ---
 
-### 🧪 Try It Locally
+## 📁 Project Structure
+
+| File                    | Description                      |
+| ----------------------- | -------------------------------- |
+| `app.py`              | Streamlit app script             |
+| `car_price_model.pkl` | Trained model pipeline           |
+| `requirements.txt`    | Dependencies for running the app |
+| `style.css`           | Optional: Custom UI styling      |
+| `space.yaml`          | Hugging Face Space config        |
+
+---
+
+## 🔧 Run Locally in 3 Easy Steps
 
 ```bash
-git clone https://github.com/yourusername/car-price-prediction
-cd car-price-prediction
+git clone https://github.com/sidrajamshaid/car-price-predictor
+cd car-price-predictor
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
+###  **📉 Dataset Note**
 
-### 📂 Dataset Not Included
+> ⚠️ **Note:** The dataset file **vehicles.csv** is **not included** in this repository because it exceeds GitHub’s file size limit (100 MB).
 
-To keep the repo lightweight, `vehicles.csv` is not included.
+> To retrain the model or explore the data:
 
-Please download it from [Kaggle here](https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data)
-and place it in the project folder before running the notebook.
+* > 🔗 Download it from [**Kaggle - Craigslist Car Listings**](https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data)
+  >
+* > 📂 Save the file as **vehicles.csv** in the project’s **root directory**
+  >
+* > 🛠️ Then you can rerun the notebook or retrain the model
+  >
