@@ -77,3 +77,16 @@ cd car-price-predictor
 pip install -r requirements.txt
 streamlit run app.py
 ```
+
+###  **📉 Dataset Note**
+
+> ⚠️ **Note:** The dataset file **vehicles.csv** is **not included** in this repository because it exceeds GitHub’s file size limit (100 MB).
+
+> To retrain the model or explore the data:
+
+* > 🔗 Download it from [**Kaggle - Craigslist Car Listings**](https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data)
+  >
+* > 📂 Save the file as **vehicles.csv** in the project’s **root directory**
+  >
+* > 🛠️ Then you can rerun the notebook or retrain the model
+  >
