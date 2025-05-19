@@ -13,7 +13,7 @@ except FileNotFoundError:
     pass
 
 # ✅ Load trained model pipeline
-model = joblib.load("car_price_model.pkl")
+model = joblib.load("car_price_modelrf.pkl")
 
 # ✅ App title and description
 st.title("🚗 Car Price Predictor")

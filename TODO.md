@@ -22,7 +22,7 @@
 - [ ] Feature importance plot
 - [ ] Error distribution plot
 
-### 🔹 D. Deployment (Assigned to: Member D or You)
+### 🔹 D. Deployment (Assigned to: Member D)
 
 - [ ] Finalize Streamlit app
 - [ ] Deploy on Hugging Face or Streamlit Cloud
